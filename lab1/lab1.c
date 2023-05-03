@@ -67,21 +67,21 @@ int main(int argc, char* argv[]) {
 
     begin = rdtsc();
     for (int i = 0; i < count; i++) {
-	    x1 = x1 + value;
-	    x2 = x2 + value;
-	    x3 = x3 + value;
+	x1 = x1 + value;
+	x2 = x2 + value;
+	x3 = x3 + value;
         x4 = x4 + value;
         x5 = x5 + value;
         x6 = x6 + value;
         x7 = x7 + value;
-	    x8 = x8 + value;
-	    x9 = x9 + value;
+        x8 = x8 + value;
+	x9 = x9 + value;
         x10 = x10 + value;
         x11 = x11 + value;
         x12 = x12 + value;
         x13 = x13 + value;
-	    x14 = x14 + value;
-	    x15 = x15 + value;
+	x14 = x14 + value;
+	x15 = x15 + value;
     }
     end = rdtsc();
 
