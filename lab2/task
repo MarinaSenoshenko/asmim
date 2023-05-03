@@ -1,0 +1,21 @@
+#!/bin/bash
+begin=begin.txt
+asm=asm.txt
+end=end.txt
+results=results.csv
+lab2=lab2.c
+if [ -f $lab2 ]; then
+  cat /dev/null >$results
+  cat /dev/null >$asm
+  for ((i = 1; i <= 300; i++)); do
+    printf "__asm(\"nop\");\n" >>$asm
+    cat /dev/null >$lab2
+    cat $begin >>$lab2
+    cat $asm >>$lab2
+    cat $end >>$lab2
+    gcc lab2.c -o lab2 -std=c99
+    ./lab2 >> $results
+    printf "\n" >> $results
+  done
+fi
+

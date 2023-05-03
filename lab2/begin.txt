@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <limits.h>
+#include <stdint.h> 
+
+typedef unsigned long long ull;
+
+extern inline uint64_t rdtsc() {
+    uint64_t x;
+    __asm__ __volatile__ ("rdtsc\n\tshl $32, %%rdx\n\tor %%rdx, %%rax" : "=a" (x) : : "rdx");
+    return x;
+}
+ 
+
+void fillRandom(int* random_cycle, int* used_numbers, int* occupied_places, int N) {
+    for (int i = 0; i < N; ++i) {
+        used_numbers[i] = 0;
+        occupied_places[i] = 0;
+    }
+    int count = 0, c = 0;
+    while (count != N - 1) {
+        int num = rand() % N;
+        if (!used_numbers[num] && !occupied_places[num]) {
+            used_numbers[num] = 1;
+            occupied_places[c] = 1;
+            random_cycle[c] = num;
+            c = num;
+            count++;
+        }
+    }
+}
+
+int main() {
+    ull t1, t2;
+    int N = 10 * (32 + 32 + 4096 + 16384) * 1024 / 4;
+    int* a = (int*)malloc(sizeof(int) * N);
+    int* used_numbers = (int*)malloc(sizeof(int) * N);
+    int* occupied_places = (int*)malloc(sizeof(int) * N);
+    
+    fillRandom(a, used_numbers, occupied_places, N);
+    ull repeat = 0, k, i, counter = 0, time, j;
+    
+    t1 = rdtsc();
+    for (k = 0, i = 0; i < N; i++) {
+        k = a[k];
