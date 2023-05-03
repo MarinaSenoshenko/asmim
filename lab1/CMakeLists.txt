@@ -5,4 +5,4 @@ set(CMAKE_C_STANDARD 11)
 
 add_compile_options(-march=native)
 
-add_executable(asmim lab4_local.c)
+add_executable(asmim lab1.c)
